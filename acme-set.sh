@@ -1,9 +1,13 @@
 #!/bin/bash
 
+# Экспорт переменных для Cloudflare
+export CF_Token="ваш токен"
+# export CF_Account_ID="ваш_account_id"
+
 ACME_HOME="/opt/acme.sh"
-CF_Token="ваш_токен"
 DOMAIN="example.com"
 DRY_RUN=false # Для теста без реального выпуска сертификатов
+
 
 
 # Проверка зависимостей
