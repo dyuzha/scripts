@@ -1,0 +1,9 @@
+name: CI Pipeline
+on: [push]  # Триггер
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4  # Клонирует репозиторий
+      - run: echo "Hello, GitHub Actions!"
