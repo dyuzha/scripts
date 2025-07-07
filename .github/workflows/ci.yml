@@ -1,9 +1,22 @@
 name: CI Pipeline
 on: [push]  # Триггер
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4  # Клонирует репозиторий
-      - run: echo "Hello, GitHub Actions!"
+jobs:                                       # Cписок задач
+  test:                                     # Задача с именем test
+    runs-on: ubuntu-latest                  # OS для запуска
+    steps:                                  # Шаги внутри job
+      - uses: actions/checkout@v4           # Клонирует репозиторий
+      - run: echo "Hello, GitHub Actions!"  # Простая команда
+
+
+# Задача (jobs: test)
+# Github
+# - Создаст виртуальную машину с Ubuntu
+# - Последовательно выполнит шаги
+
+# Шаги (steps)
+# -> actions/checkout@v4
+# Специальное действие, которое клонирует ваш репозиторий в директорию runner
+# Анал. git clone https://github.com/ваш-логин/ваш-репозиторий.git
+# -> run: echo "Hello, Github Actions!"
+# Выводит текст в лог
