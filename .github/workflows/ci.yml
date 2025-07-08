@@ -68,7 +68,7 @@ jobs:
             -e DRY_RUN="true" \
             -e ACME_HOME="/opt/acme" \
             -e DOMAIN="test1.dyuzha.ru" \
-            acme-set-script
+            acme-script
 
 
       - name: Archive certificates
