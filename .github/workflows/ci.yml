@@ -70,15 +70,6 @@ jobs:
             -e DOMAIN="test1.dyuzha.ru" \
             acme-script
 
-
-      - name: Archive certificates
-        if: success()
-        run: |
-          tar czvf certs.tar.gz $(find "$ACME_HOME" -name "${DOMAIN}*" -type d)
-          echo "Certificates archived"
-        # Пояснение:
-
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:  # Параметры действия
