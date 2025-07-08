@@ -71,7 +71,7 @@ jobs:
 
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3  # Используем действие для загрузки артефактов
+        uses: actions/upload-artifact@v4  # Используем действие для загрузки артефактов
         with:  # Параметры действия
           name: script-output  # Имя артефакта
           path: output.log  # Путь к файлу для сохранения
