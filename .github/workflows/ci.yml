@@ -63,7 +63,7 @@ jobs:
 
 
       - name: Archive certificates
-        if: success()
+        if: success
         run: |
           tar czvf certs.tar.gz $(find "$ACME_HOME" -name "${DOMAIN}*" -type d)
           echo "Certificates archived"
