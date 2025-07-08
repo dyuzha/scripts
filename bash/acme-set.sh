@@ -33,7 +33,7 @@ chown "$USER:$USER" "$ACME_HOME"
 
 # Установка acme.sh
 echo "Устанавливаем acme.sh в ${ACME_HOME}..."
-if ! curl https://get.acme.sh | sh -s --install \
+if ! curl https://get.acme.sh | bash -s -- --install \
   --home "$ACME_HOME" \
   --config-home "$ACME_HOME" \
   --cert-home "$ACME_HOME" \
@@ -91,4 +91,6 @@ echo -e "\nРезультат:"
 echo -e "\nСертификаты находятся в:"
 find "$ACME_HOME" -name "${DOMAIN}*" -type d
 
-echo -e "\nГотово! Для автоматического обновления сертификатов ничего дополнительно делать не нужно - acme.sh настроит автоматическое обновление."
+echo -e "\nГотово! Для автоматического обновления сертификатов"
+echo -e "ничего дополнительно делать не нужно - "
+echo -e "acme.sh настроит автоматическое обновление."
