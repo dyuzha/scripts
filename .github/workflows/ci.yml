@@ -1,3 +1,5 @@
+---
+
 # Название workflow (отображается в интерфейсе GitHub Actions)
 name: ACME SSL Certificate Management
 
@@ -7,6 +9,7 @@ on:
   push:
     branches: [main]  # Только для ветки main
     # paths: ['bash/acme-set.sh'] # Только если изменены файлы в папке src/
+  workflow_dispatch:  # ← Базовый вариант
 
 
 # Блок задач (может содержать несколько независимых задач)
@@ -18,11 +21,11 @@ jobs:
     runs-on: ubuntu-latest  # OS для запуска
 
     env:
-      CF_Token: ${{ secrets.CF_Token }}
+      CF_Token: ${{ secrets.CF_TOKEN }}
       CF_Account_ID: ${{ secrets.CF_ACCOUNT_ID }}
       ACME_HOME: ./opt/acme
       DOMAIN: test1.dyuzha.ru
-      DRY_RUN: true  # Всегда true для CI!
+      DRY_RUN: "true"  # Всегда true для CI!
 
     steps:
       - name: Checkout repository
@@ -38,10 +41,6 @@ jobs:
         # - Вывод будет виден в логах выполнения workflow
         # - Можно использовать многострочные команды через |
         #
-      - name: Setup environment
-        run: |  # Многострочная команда
-          mkdir -p "$ACME_HOME"
-          echo "ACME_HOME set to: $ACME_HOME"
 
       - name: Verify script syntax # Человекочитаемое название шага
         run: |
