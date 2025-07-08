@@ -48,16 +48,27 @@ jobs:
           bash -n ./bash/acme-set.sh || exit 1
         # Пояснение:
 
-      - name: Execute acme-set.sh (Staging)
+      # - name: Execute acme-set.sh (Staging)
+      #   run: |
+      #     bash ./bash/acme-set.sh > output.log 2>&1
+      #
+      #     if grep -q "Error" output.log; then
+      #       echo "::error::Script failed, check output.log"
+      #       exit 1
+      #     fi
+      #     echo "::notice::ACME script executed successfully"
+      #   # Пояснение:
+      #
+      - name: Run in Docker container
         run: |
-          bash ./bash/acme-set.sh > output.log 2>&1
-
-          if grep -q "Error" output.log; then
-            echo "::error::Script failed, check output.log"
-            exit 1
-          fi
-          echo "::notice::ACME script executed successfully"
-        # Пояснение:
+          docker build -t acme-script .
+          docker run -it --rm \
+            -e CF_TOKEN="${{ secrets.CF_TOKEN }}" \
+            -e CF_Account_ID="${{ secrets.CF_Account_ID }}" \
+            -e DRY_RUN="true" \
+            -e ACME_HOME="/opt/acme" \
+            -e DOMAIN="test1.dyuzha.ru" \
+            acme-set-script
 
 
       - name: Archive certificates

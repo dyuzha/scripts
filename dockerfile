@@ -1,11 +1,10 @@
 # Dockerfile
-FROM bash:5.2
-
-# Устанавливаем Bats и другие утилиты
-RUN apk add --no-cache bats coreutils tar gzip
+FROM bash:5.3
 
 WORKDIR /app
-COPY . .
+COPY ./bash/acme-set.sh .
 
-# Запуск тестов при старте контейнера
-CMD ["bats", "tests/"]
+RUN chmod +x /app/acme-set.sh
+
+ENTRYPOINT ["bash"]
+CMD ["-i"]
