@@ -1,7 +1,12 @@
 #!/bin/bash
+set -x
+
+echo "=== Debug info ==="
+env | grep -E 'CF_|ACME|DOMAIN'
+echo "================="
 
 # Экспорт переменных для Cloudflare
-export CF_Token="ваш токен"
+# export CF_Token="ваш токен"
 # export CF_Account_ID="ваш_account_id"
 
 ACME_HOME="/opt/acme.sh"
