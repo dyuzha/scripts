@@ -62,7 +62,7 @@ jobs:
       - name: Run in Docker container
         run: |
           docker build -t acme-script .
-          docker run -it --rm \
+          docker run --rm \
             -e CF_TOKEN="${{ secrets.CF_TOKEN }}" \
             -e CF_Account_ID="${{ secrets.CF_Account_ID }}" \
             -e DRY_RUN="true" \
