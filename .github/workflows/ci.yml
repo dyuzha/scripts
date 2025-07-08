@@ -50,8 +50,7 @@ jobs:
 
       - name: Execute acme-set.sh (Staging)
         run: |
-          # chmod +x ./bash/acme-set.sh
-          ./bash/acme-set.sh > output.log 2>&1
+          bash ./bash/acme-set.sh > output.log 2>&1
 
           if grep -q "Error" output.log; then
             echo "::error::Script failed, check output.log"
