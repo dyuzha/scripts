@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest  # OS для запуска
 
     env:
-      CF_Token: ${{ secrets.CF_TOKEN }}
+      CF_TOKEN: ${{ secrets.CF_TOKEN }}
       CF_Account_ID: ${{ secrets.CF_ACCOUNT_ID }}
       ACME_HOME: ./opt/acme
       DOMAIN: test1.dyuzha.ru
@@ -29,11 +29,11 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Используем стандартное действие checkout версии 4
+        uses: actions/checkout@v4
         # Пояснение:
         # - Создает полную копию репозитория в рабочей директории runner
         # - Автоматически настраивает Git-контекст
-        # - Аналог команды: git clone --depth=1 https://github.com/ваш-репозиторий
+        # - Аналог команды: git clone --depth=1
 
       - run: echo "Hello, GitHub Actions!"
         # Пояснение:
@@ -53,7 +53,7 @@ jobs:
           chmod +x ./bash/acme-set.sh
           ./bash/acme-set.sh > output.log 2>&1
 
-          if grep - q "Error" output.log; then
+          if grep -q "Error" output.log; then
             echo "::error::Script failed, check output.log"
             exit 1
           fi
@@ -62,7 +62,7 @@ jobs:
 
 
       - name: Archive certificates
-        if: success
+        if: success()
         run: |
           tar czvf certs.tar.gz $(find "$ACME_HOME" -name "${DOMAIN}*" -type d)
           echo "Certificates archived"
@@ -70,7 +70,7 @@ jobs:
 
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4  # Используем действие для загрузки артефактов
+        uses: actions/upload-artifact@v4
         with:  # Параметры действия
           name: script-output  # Имя артефакта
           path: output.log  # Путь к файлу для сохранения
@@ -78,4 +78,3 @@ jobs:
         # - Сохраняет файл output.log как артефакт выполнения
         # - Артефакт можно скачать через интерфейс GitHub Actions
         # - Хранится 90 дней (для бесплатных аккаунтов)
-
